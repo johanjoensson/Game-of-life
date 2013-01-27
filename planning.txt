@@ -1,0 +1,38 @@
+Dela upp projektet i moduler.
+
+En motor som genererar spelplanen samt sköter generationsskiftena och en eller
+flera visualiseringsmoduler.
+
+Spelmotor:
+
+Planen representeras av en matris, av variabla dimensioner. Planen delas in i
+celler och varje cell kan vara levande eller död, spelreglerna avgör hur planen
+förändras mellan varje generation.
+
+En cell dör om den har...
+
+... färre än två levande grannar (underpopulation)
+... fler än tre levande grannar (överpopulation)
+
+En cell väcks till liv om den har...
+
+... exakt tre levande grannar (fortplantning)
+
+En cell överlever om den har...
+
+... två eller tre levande grannar
+
+Representation av spelplanen:
+
+En enkel matris är lätt att skriva, men tråkigt! Vad sägs om att bara spara
+undan levande celler och deras koordinater, kanske i en länkad lista?
+
+Hantera generationsskifte (ticks):
+Skapa en matris med bara heltal (en byte per tal bör räcka), löp igenom den
+länkade listan och uppdatera varje cell som har den aktiva som granne. När
+samtliga levande celler varit aktiva uppdaterar vi listan med levande celler
+genom att löpa igenom matrisen.
+
+Visualisering:
+Tag emot lista på levande celler och storleken på planen, sätt alla celler till
+döda och ändra de celler som finns i den länkade listan till levande. That's it!
