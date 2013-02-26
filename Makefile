@@ -5,20 +5,24 @@ SRC = src
 LDFLAGS = -lSDL -I/usr/include/SDL -lncurses
 
 
+SOURCES = $(wildcard $(SRC)/*.c)
 
-OBJ = $(BIN)/game.o\
-      $(BIN)/congame.o\
-      $(BIN)/print_nc.o
+OBJ = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SOURCES))
 
-EXE = game\
+EXE = 	game\
 
-all:$(EXE) 
+.PHONY: bindir srcdir
+all: bindir srcdir $(EXE) 
+
+bindir:
+	mkdir -p bin
+
+srcdir:
+	mkdir -p src
 
 $(BIN)/%.o : $(SRC)/%.c
-	$(CC) -c $(CFLAGS) $? $(LDFLAGS) -o $@
+	$(CC) -c $(CFLAGS) $? -o $@
 
-# sample: sample.o
-# 	$(CC) $(CFLAGS) $(SRC)/$? $(LDFLAGS) -o $@
 
 game:   $(OBJ)
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
